@@ -68,10 +68,7 @@ class ModelArguments:
             "Don't set if you want to train a model from scratch."
         },
     )
-    save_total_limit: Optional[int] = field(
-        default=2,
-        metadata={"help": "If only a fixed number of checkpoints need to be saved."},
-    )
+    
     model_type: Optional[str] = field(
         default=None,
         metadata={"help": "If training from scratch, pass a model type from the list: " + ", ".join(MODEL_TYPES)},
@@ -108,9 +105,14 @@ class DataTrainingArguments:
     """
     Arguments pertaining to what data we are going to input our model for training and eval.
     """
+    
 
     dataset_name: Optional[str] = field(
         default=None, metadata={"help": "The name of the dataset to use (via the datasets library)."}
+    )
+    save_total_limit: Optional[int] = field(
+        default=2,
+        metadata={"help": "If only a fixed number of checkpoints need to be saved."},
     )
     dataset_config_name: Optional[str] = field(
         default=None, metadata={"help": "The configuration name of the dataset to use (via the datasets library)."}
