@@ -68,6 +68,10 @@ class ModelArguments:
             "Don't set if you want to train a model from scratch."
         },
     )
+    save_total_limit: Optional[int] = field(
+        default=2,
+        metadata={"help": "If only a fixed number of checkpoints need to be saved."},
+    )
     model_type: Optional[str] = field(
         default=None,
         metadata={"help": "If training from scratch, pass a model type from the list: " + ", ".join(MODEL_TYPES)},
