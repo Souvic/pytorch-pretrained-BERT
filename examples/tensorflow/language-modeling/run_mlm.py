@@ -363,6 +363,17 @@ def main():
         if extension == "txt":
             extension = "text"
         raw_datasets = load_dataset(extension, data_files=data_files)
+        if "validation" not in data_files:
+            raw_datasets["validation"] = load_dataset(
+                data_args.dataset_name,
+                data_args.dataset_config_name,
+                split=f"train[:{data_args.validation_split_percentage}%]",
+            )
+            raw_datasets["train"] = load_dataset(
+                data_args.dataset_name,
+                data_args.dataset_config_name,
+                split=f"train[{data_args.validation_split_percentage}%:]",
+            )
     # See more about loading any type of standard or custom dataset (from files, python dict, pandas DataFrame, etc) at
     # https://huggingface.co/docs/datasets/loading_datasets.html.
     # endregion
